@@ -640,7 +640,14 @@
 
       if (viewId === "colleges") {
         viewColleges.classList.remove("hidden");
+      } else if (viewId === "certificates") {
+        window.location.href = "/certificates/";
+        return;
+      } else if (viewId === "announcements") {
+        window.location.href = "/announcements/";
+        return;
       } else {
+        // Fallback for other views if any, though not strictly needed for this task
         try {
           const response = await fetch(`${viewId}.html`);
           if (!response.ok) {
