@@ -9,7 +9,7 @@
 <body class="bg-slate-950 text-slate-100">
   <div class="min-h-screen flex">
     <!-- Sidebar -->
-    <aside class="w-64 bg-slate-950 border-r border-slate-800 hidden md:flex flex-col">
+    <aside id="sidebar" class="w-64 bg-slate-950 border-r border-slate-800 fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 z-40 md:relative md:translate-x-0 md:flex flex-col">
       <div class="px-4 py-4 border-b border-slate-800 flex items-center gap-2">
         <div class="h-8 w-8 rounded-xl bg-indigo-500 flex items-center justify-center text-xs font-bold">
           VT
@@ -39,6 +39,11 @@
     <div class="flex-1 flex flex-col">
       <!-- Top Bar -->
       <header class="h-14 border-b border-slate-800 flex items-center justify-between px-4 bg-slate-950/80 backdrop-blur">
+        <button id="sidebarToggle" class="inline-flex md:hidden items-center justify-center h-8 w-8 rounded-lg border border-slate-700 bg-slate-900 text-slate-200">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
         <div>
           <div class="text-sm font-medium">Colleges & Students Overview</div>
           <div class="text-[11px] text-slate-400">
@@ -78,10 +83,18 @@
         <!-- Colleges Table -->
         <section class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-5 text-xs md:text-sm">
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-sm font-semibold">Colleges & Program Deadlines</h2>
-            <div class="text-[11px] text-slate-400">
-              Click a college to see its students and activity.
+            <div class="flex items-baseline gap-2">
+              <h2 class="text-sm font-semibold">Colleges & Program Deadlines</h2>
+              <div class="text-[11px] text-slate-400">
+                Click a college to see its students and activity.
+              </div>
             </div>
+            <button
+              id="createCollegeBtn"
+              class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-medium hover:bg-indigo-700 transition"
+            >
+              Create College
+            </button>
           </div>
           <div class="border border-slate-800 rounded-2xl overflow-hidden">
             <table class="w-full text-left border-collapse">
@@ -149,7 +162,7 @@
       </main>
 
       <!-- Toast Notification -->
-      <div
+    <div
         id="toast"
         class="fixed bottom-4 right-4 px-4 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs text-slate-50 shadow-lg shadow-slate-900/60 opacity-0 pointer-events-none transition"
       >
@@ -158,7 +171,99 @@
     </div>
   </div>
 
+  <!-- Create College Modal -->
+  <div
+    id="createCollegeModal"
+    class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-xl w-full max-w-md p-6 relative">
+      <button
+        class="absolute top-4 right-4 text-slate-400 hover:text-slate-200 text-xl"
+        onclick="closeCreateCollegeModal()"
+      >
+        &times;
+      </button>
+      <h3 class="text-lg font-semibold text-slate-100 mb-1">Create College Profile (Demo Only)</h3>
+      <p class="text-xs text-slate-400 mb-4">This is a demo form. Data is not actually saved.</p>
+
+      <form id="createCollegeForm" onsubmit="handleCreateCollegeDemoSubmit(event)" class="space-y-4">
+        <div>
+          <label for="collegeName" class="block text-slate-400 text-xs mb-1">College Name</label>
+          <input
+            type="text"
+            id="collegeName"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., Tech University"
+            required
+          />
+        </div>
+        <div>
+          <label for="programName" class="block text-slate-400 text-xs mb-1">Program Name</label>
+          <input
+            type="text"
+            id="programName"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., AI & Machine Learning"
+            required
+          />
+        </div>
+        <div>
+          <label for="deadline" class="block text-slate-400 text-xs mb-1">Deadline</label>
+          <input
+            type="date"
+            id="deadline"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            required
+          />
+        </div>
+        <div>
+          <label for="status" class="block text-slate-400 text-xs mb-1">Status</label>
+          <select
+            id="status"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            required
+          >
+            <option value="Active">Active</option>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+        <div>
+          <label for="estimatedStudents" class="block text-slate-400 text-xs mb-1">Estimated Students</label>
+          <input
+            type="number"
+            id="estimatedStudents"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., 150"
+            min="0"
+            required
+          />
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition"
+            onclick="closeCreateCollegeModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition"
+          >
+            Save (Demo)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile sidebar -->
+  <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
   <script>
+    console.log("Script started!");
     // Demo data (fake "database")
     const colleges = [
       {
@@ -421,6 +526,39 @@
       }, 2000);
     }
 
+    // Modal functions
+    let createCollegeModal;
+    let createCollegeForm;
+
+    function openCreateCollegeModal() {
+      console.log("openCreateCollegeModal called");
+      if (createCollegeModal) {
+        console.log("createCollegeModal element found.");
+        createCollegeModal.classList.remove("opacity-0", "pointer-events-none");
+        createCollegeModal.classList.add("opacity-100");
+      } else {
+        console.error("createCollegeModal element not found in openCreateCollegeModal!");
+      }
+    }
+
+    function closeCreateCollegeModal() {
+      console.log("closeCreateCollegeModal called");
+      if (createCollegeModal) {
+        createCollegeModal.classList.remove("opacity-100");
+        createCollegeModal.classList.add("opacity-0", "pointer-events-none");
+        createCollegeForm.reset(); // Reset form fields on close
+      }
+    }
+
+    function handleCreateCollegeDemoSubmit(event) {
+      event.preventDefault(); // Prevent actual form submission
+      console.log("handleCreateCollegeDemoSubmit called");
+      showToast("Demo only: College profile UI captured but not saved.");
+      setTimeout(() => {
+        closeCreateCollegeModal();
+      }, 1500); // Close modal after a short delay to show toast
+    }
+
     // Event delegation for colleges table
     collegeTableBody.addEventListener("click", (e) => {
       const viewBtn = e.target.closest("[data-view-college]");
@@ -485,6 +623,43 @@
     // Initial render
     renderSummary();
     renderColleges();
+
+    // Ensure DOM is fully loaded before attaching event listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      createCollegeModal = document.getElementById("createCollegeModal");
+      createCollegeForm = document.getElementById("createCollegeForm");
+
+      const createCollegeBtn = document.getElementById("createCollegeBtn");
+      if (createCollegeBtn) {
+        createCollegeBtn.addEventListener("click", openCreateCollegeModal);
+      } else {
+        console.error("Create College button not found!");
+      }
+
+      if (!createCollegeModal) {
+        console.error("createCollegeModal element not found on DOMContentLoaded!");
+      }
+      if (!createCollegeForm) {
+        console.error("createCollegeForm element not found on DOMContentLoaded!");
+      }
+
+      // Sidebar toggle logic
+      const sidebar = document.getElementById("sidebar");
+      const sidebarToggle = document.getElementById("sidebarToggle");
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+      if (sidebar && sidebarToggle && sidebarOverlay) {
+        const toggleSidebar = () => {
+          sidebar.classList.toggle("-translate-x-full");
+          sidebarOverlay.classList.toggle("hidden");
+        };
+
+        sidebarToggle.addEventListener("click", toggleSidebar);
+        sidebarOverlay.addEventListener("click", toggleSidebar);
+      } else {
+        console.error("Sidebar, toggle button, or overlay element not found!");
+      }
+    });
   </script>
 </body>
 </html>
