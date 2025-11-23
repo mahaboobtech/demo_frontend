@@ -69,6 +69,12 @@
             >
               Existing User Login
             </button>
+            <button
+              onclick="openStudentRegisterModal()"
+              class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-sm font-medium"
+            >
+              Student Registration
+            </button>
           </div>
 
           <div class="grid grid-cols-3 gap-4 text-xs md:text-sm">
@@ -286,7 +292,7 @@
               placeholder="contact@college.edu"
               required
             />
-          </div>
+          </div>-
           <div>
             <label class="block text-xs text-slate-400 mb-1">Interest Area</label>
             <select
@@ -309,6 +315,85 @@
         </form>
         <div id="joinMessage" class="mt-3 text-xs text-emerald-400 hidden">
           ✔ Demo: Your interest has been recorded. In production, our team would contact you shortly.
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Registration Modal -->
+    <div
+      id="studentRegisterModal"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition"
+    >
+      <div class="bg-slate-950 border border-slate-800 rounded-3xl w-full max-w-md p-6 relative">
+        <button
+          onclick="closeStudentRegisterModal()"
+          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none"
+        >
+          ×
+        </button>
+        <h2 class="text-lg font-semibold mb-1">Student Registration</h2>
+        <p class="text-xs text-slate-400 mb-4">
+          Register to access VR pharma training scenarios.
+        </p>
+        <form class="space-y-3 text-sm" onsubmit="handleStudentRegister(event)" id="studentRegisterForm">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Full Name</label>
+            <input
+              type="text"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="e.g., Jane Doe"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Email Address</label>
+            <input
+              type="email"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="jane.doe@student.edu"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Password</label>
+            <input
+              type="password"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="********"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Confirm Password</label>
+            <input
+              type="password"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="********"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Select Your College</label>
+            <select
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              required
+            >
+              <option value="">-- Select College --</option>
+              <option>ABC Engineering College</option>
+              <option>XYZ Institute of Technology</option>
+              <option>City Professional College</option>
+              <option>Global Pharma University</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 font-medium"
+          >
+            Register (Demo)
+          </button>
+        </form>
+        <div id="studentRegisterMessage" class="mt-3 text-xs text-emerald-400 hidden">
+          ✔ Demo: Registration successful! You can now log in.
         </div>
       </div>
     </div>
@@ -381,6 +466,24 @@
     function handleJoin(e) {
       e.preventDefault();
       joinMessage.classList.remove("hidden");
+    }
+
+    // Student Registration modal controls
+    const studentRegisterModal = document.getElementById("studentRegisterModal");
+    const studentRegisterMessage = document.getElementById("studentRegisterMessage");
+    const studentRegisterForm = document.getElementById("studentRegisterForm");
+
+    function openStudentRegisterModal() {
+      studentRegisterModal.classList.remove("opacity-0", "pointer-events-none");
+    }
+    function closeStudentRegisterModal() {
+      studentRegisterModal.classList.add("opacity-0", "pointer-events-none");
+      studentRegisterMessage.classList.add("hidden");
+      if (studentRegisterForm) studentRegisterForm.reset();
+    }
+    function handleStudentRegister(e) {
+      e.preventDefault();
+      studentRegisterMessage.classList.remove("hidden");
     }
 
     // Footer year
