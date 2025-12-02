@@ -59,10 +59,10 @@
       </header>
 
       <!-- Content -->
-      <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+      <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 max-w-6xl mx-auto">
         <section id="view-colleges" class="space-y-4">
           <!-- Summary Cards -->
-          <section class="grid md:grid-cols-4 gap-3 text-xs">
+          <section class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
               <div class="text-slate-400 mb-1">Partner Institutions</div>
               <div class="text-lg font-semibold" id="totalColleges">3</div>
@@ -78,6 +78,37 @@
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
               <div class="text-slate-400 mb-1">Locked VR Batches</div>
               <div class="text-lg font-semibold" id="totalLocked">0</div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Overall Completion Rate</div>
+              <div class="text-lg font-semibold" id="overallCompletionRate">0%</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Percentage of students with completed programs.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">In-progress Students</div>
+              <div class="text-lg font-semibold" id="inProgressCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students still attempting VR scenarios.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Locked Students</div>
+              <div class="text-lg font-semibold" id="lockedStudentsCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students whose access has been locked / reset.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Certificates Pending</div>
+              <div class="text-lg font-semibold" id="pendingCertificatesCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students who completed but do not yet have a certificate.
+              </div>
             </div>
           </section>
 
@@ -98,26 +129,28 @@
               </button>
             </div>
             <div class="border border-slate-800 rounded-2xl overflow-hidden">
-              <table class="w-full text-left border-collapse">
-                <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
-                  <tr>
-                    <th class="py-2.5 px-3">College</th>
-                    <th class="py-2.5 px-3">Program</th>
-                    <th class="py-2.5 px-3">Deadline</th>
-                    <th class="py-2.5 px-3">Students</th>
-                    <th class="py-2.5 px-3">Status</th>
-                    <th class="py-2.5 px-3">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="collegeTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
-                  <!-- Filled by JS -->
-                </tbody>
-              </table>
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[640px] text-left border-collapse">
+                  <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
+                    <tr>
+                      <th class="py-2.5 px-3">College</th>
+                      <th class="py-2.5 px-3">Program</th>
+                      <th class="py-2.5 px-3">Deadline</th>
+                      <th class="py-2.5 px-3">Students</th>
+                      <th class="py-2.5 px-3">Status</th>
+                      <th class="py-2.5 px-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="collegeTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
+                    <!-- Filled by JS -->
+                  </tbody>
+                </table>
+              </div>
             </div>
           </section>
 
           <!-- Students & Activity -->
-          <section class="grid md:grid-cols-3 gap-4">
+          <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <!-- Students List -->
             <div class="md:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-5 text-xs md:text-sm">
               <div class="flex items-center justify-between mb-3">
@@ -126,26 +159,44 @@
                 </h2>
                 <span id="selectedCollegeDeadline" class="text-[11px] text-slate-400"></span>
               </div>
+              <div id="selectedCollegeStats" class="mb-3 hidden">
+                <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                  <span>College analytics (demo):</span>
+                  <span id="selectedCollegeCounts" class="text-slate-300"></span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full flex" id="selectedCollegeStatsBar">
+                    <!-- JS will insert colored segments -->
+                  </div>
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span id="selectedCollegeCompletedLabel">Completed: 0</span>
+                  <span id="selectedCollegeInProgressLabel">In Progress: 0</span>
+                  <span id="selectedCollegeLockedLabel">Locked: 0</span>
+                </div>
+              </div>
               <div class="border border-slate-800 rounded-2xl overflow-hidden">
-                <table class="w-full text-left border-collapse">
-                  <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
-                    <tr>
-                      <th class="py-2.5 px-3">Student</th>
-                      <th class="py-2.5 px-3">Access till</th>
-                      <th class="py-2.5 px-3">Activity</th>
-                      <th class="py-2.5 px-3">Certificate</th>
-                      <th class="py-2.5 px-3">Program</th>
-                      <th class="py-2.5 px-3">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="studentTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
-                    <tr>
-                      <td colspan="6" class="py-6 px-3 text-center text-slate-500">
-                        Select a college in the table above to view students.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div class="overflow-x-auto">
+                  <table class="w-full min-w-[640px] text-left border-collapse">
+                    <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
+                      <tr>
+                        <th class="py-2.5 px-3">Student</th>
+                        <th class="py-2.5 px-3">Access till</th>
+                        <th class="py-2.5 px-3">Activity</th>
+                        <th class="py-2.5 px-3">Certificate</th>
+                        <th class="py-2.5 px-3">Program</th>
+                        <th class="py-2.5 px-3">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studentTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
+                      <tr>
+                        <td colspan="6" class="py-6 px-3 text-center text-slate-500">
+                          Select a college in the table above to view students.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
 
@@ -353,10 +404,22 @@
     const activityList = document.getElementById("activityList");
     const toast = document.getElementById("toast");
     const toastMessage = document.getElementById("toastMessage");
-    const totalCollegesEl = document.getElementById("totalColleges");
-    const totalStudentsEl = document.getElementById("totalStudents");
-    const totalCertificatesEl = document.getElementById("totalCertificates");
-    const totalLockedEl = document.getElementById("totalLocked");
+const totalCollegesEl = document.getElementById("totalColleges");
+const totalStudentsEl = document.getElementById("totalStudents");
+const totalCertificatesEl = document.getElementById("totalCertificates");
+const totalLockedEl = document.getElementById("totalLocked");
+
+const overallCompletionRateEl = document.getElementById("overallCompletionRate");
+const inProgressCountEl = document.getElementById("inProgressCount");
+const lockedStudentsCountEl = document.getElementById("lockedStudentsCount");
+const pendingCertificatesCountEl = document.getElementById("pendingCertificatesCount");
+
+const selectedCollegeStats = document.getElementById("selectedCollegeStats");
+const selectedCollegeStatsBar = document.getElementById("selectedCollegeStatsBar");
+const selectedCollegeCounts = document.getElementById("selectedCollegeCounts");
+const selectedCollegeCompletedLabel = document.getElementById("selectedCollegeCompletedLabel");
+const selectedCollegeInProgressLabel = document.getElementById("selectedCollegeInProgressLabel");
+const selectedCollegeLockedLabel = document.getElementById("selectedCollegeLockedLabel");
 
     let selectedCollegeId = null;
 
@@ -374,6 +437,35 @@
       totalStudentsEl.textContent = totalStudents;
       totalCertificatesEl.textContent = totalCertificates;
       totalLockedEl.textContent = totalLocked;
+
+      // New analytics calculations
+      const totalStudentsAll = colleges.reduce((sum, c) => sum + c.students.length, 0);
+      const completedCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "Completed").length,
+        0
+      );
+      const inProgressCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "In Progress").length,
+        0
+      );
+      const lockedCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "Locked").length,
+        0
+      );
+      const pendingCertsCount = colleges.reduce(
+        (sum, c) =>
+          sum +
+          c.students.filter((s) => s.programStatus === "Completed" && s.certificateIssued === false)
+            .length,
+        0
+      );
+
+      const completionRate = totalStudentsAll === 0 ? 0 : Math.round((completedCount / totalStudentsAll) * 100);
+
+      if (overallCompletionRateEl) overallCompletionRateEl.textContent = `${completionRate}%`;
+      if (inProgressCountEl) inProgressCountEl.textContent = inProgressCount;
+      if (lockedStudentsCountEl) lockedStudentsCountEl.textContent = lockedCount;
+      if (pendingCertificatesCountEl) pendingCertificatesCountEl.textContent = pendingCertsCount;
     }
 
     // Render colleges table
@@ -437,6 +529,52 @@
       selectedCollegeId = collegeId;
       selectedCollegeName.textContent = college.name;
       selectedCollegeDeadline.textContent = `College deadline: ${college.deadline}`;
+
+      // Per-college analytics
+      const total = college.students.length;
+      const completed = college.students.filter((s) => s.programStatus === "Completed").length;
+      const inProgress = college.students.filter((s) => s.programStatus === "In Progress").length;
+      const locked = college.students.filter((s) => s.programStatus === "Locked").length;
+
+      if (total === 0) {
+        if (selectedCollegeStats) selectedCollegeStats.classList.add("hidden");
+      } else {
+        if (selectedCollegeStats) selectedCollegeStats.classList.remove("hidden");
+      }
+
+      if (selectedCollegeCounts) {
+        selectedCollegeCounts.textContent = `Total: ${total} · Completed: ${completed} · In Progress: ${inProgress} · Locked: ${locked}`;
+      }
+
+      const completedPct = total > 0 ? (completed / total) * 100 : 0;
+      const inProgressPct = total > 0 ? (inProgress / total) * 100 : 0;
+      const lockedPct = total > 0 ? (locked / total) * 100 : 0;
+
+      if (selectedCollegeStatsBar) {
+        selectedCollegeStatsBar.innerHTML = "";
+        if (completedPct > 0) {
+          const completedSegment = document.createElement("div");
+          completedSegment.style.width = `${completedPct}%`;
+          completedSegment.className = "bg-emerald-500";
+          selectedCollegeStatsBar.appendChild(completedSegment);
+        }
+        if (inProgressPct > 0) {
+          const inProgressSegment = document.createElement("div");
+          inProgressSegment.style.width = `${inProgressPct}%`;
+          inProgressSegment.className = "bg-indigo-500";
+          selectedCollegeStatsBar.appendChild(inProgressSegment);
+        }
+        if (lockedPct > 0) {
+          const lockedSegment = document.createElement("div");
+          lockedSegment.style.width = `${lockedPct}%`;
+          lockedSegment.className = "bg-slate-600";
+          selectedCollegeStatsBar.appendChild(lockedSegment);
+        }
+      }
+
+      if (selectedCollegeCompletedLabel) selectedCollegeCompletedLabel.textContent = `Completed: ${completed}`;
+      if (selectedCollegeInProgressLabel) selectedCollegeInProgressLabel.textContent = `In Progress: ${inProgress}`;
+      if (selectedCollegeLockedLabel) selectedCollegeLockedLabel.textContent = `Locked: ${locked}`;
 
       studentTableBody.innerHTML = "";
       college.students.forEach((student) => {

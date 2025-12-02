@@ -1,0 +1,17 @@
+1. admin 
+2. dashboard 
+3. admin restrict college to number of slots 
+4. feedback and tticketikng
+5. 
+
+1. functionaly displaying team wise 
+
+team ? 
+
+theme : 
+
+
+1. dashboard
+2. college& students & experptem
+3. certificates 
+4. feedback and ticketing 
