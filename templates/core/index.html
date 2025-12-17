@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AScienti Sols · VR Pharma Training & Certification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <!-- Page Wrapper -->
+  <div class="min-h-screen flex flex-col">
+    <!-- Navbar -->
+    <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <img src="/static/image.png" alt="AScienti Sols Logo" class="h-8 w-8 rounded-xl" />
+          <div class="flex flex-col">
+            <span class="font-semibold tracking-tight text-lg">AScienti Sols</span>
+            <span class="text-[11px] text-slate-400 -mt-1">
+              VR Pharma Training & Assessment
+            </span>
+          </div>
+        </div>
+        <nav class="hidden md:flex gap-6 text-sm text-slate-300">
+          <a href="#features" class="hover:text-white">Why VR</a>
+          <a href="#how-it-works" class="hover:text-white">How It Works</a>
+          <a href="#join" class="hover:text-white">For Colleges</a>
+        </nav>
+        <button
+          onclick="scrollToLogin()"
+          class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-500 hover:bg-indigo-400 transition"
+        >
+          Login
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="flex-1">
+      <section class="max-w-6xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+        <!-- Left: Copy -->
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs mb-4">
+            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+            Pharma · VR Lab Simulations · Skill Validation
+          </div>
+          <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">
+            VR-powered <span class="text-indigo-400">pharma training</span>  
+            and certification for students & institutions.
+          </h1>
+          <p class="text-slate-300 text-sm md:text-base mb-6">
+            AScienti Sols helps pharmacy colleges and training centers run 
+            <strong>virtual reality lab simulations</strong>, assess students on <strong>real-world scenarios</strong>, 
+            and issue <strong>industry-ready certificates</strong> — all on a single platform.
+          </p>
+          <div class="flex flex-wrap gap-3 mb-8">
+            <button
+              onclick="openJoinModal()"
+              class="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-sm font-medium"
+            >
+              Partner with Us (College)
+            </button>
+            <button
+              onclick="scrollToLogin()"
+              class="px-5 py-2.5 rounded-xl border border-slate-700 hover:border-slate-500 text-sm font-medium"
+            >
+              Existing User Login
+            </button>
+            <button
+              onclick="openStudentRegisterModal()"
+              class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-sm font-medium"
+            >
+              Student Registration
+            </button>
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 text-xs md:text-sm">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-indigo-400 font-semibold">VR Scenarios</div>
+              <div class="text-slate-400">
+                Aseptic technique, compounding, dispensing, and more.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-indigo-400 font-semibold">Objective Scoring</div>
+              <div class="text-slate-400">
+                Time, accuracy, compliance & safety metrics tracked.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-indigo-400 font-semibold">Digital Certificates</div>
+              <div class="text-slate-400">
+                Verified completion certificates for students.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Login Card -->
+        <div id="login" class="md:justify-self-end w-full max-w-md">
+          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl shadow-indigo-500/10">
+            <h2 class="text-lg font-semibold mb-1">Login</h2>
+            <p class="text-xs text-slate-400 mb-4">
+              Access your VR assessment data, cohorts, and certificates.
+            </p>
+
+            <!-- Role Tabs -->
+            <div class="flex gap-2 mb-4 text-xs">
+              <button
+                class="role-tab px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800 text-slate-100"
+                data-role="student"
+              >
+                Student
+              </button>
+              <button
+                class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
+                data-role="college"
+              >
+                College / Faculty
+              </button>
+              <button
+                class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
+                data-role="admin"
+              >
+                Admin
+              </button>
+            </div>
+
+            <!-- Fake Login Form -->
+            <form onsubmit="handleLogin(event)" class="space-y-3 text-sm">
+              <input type="hidden" id="selectedRole" value="student" />
+
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Email / Username</label>
+                <input
+                  type="text"
+                  class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm focus:outline-none focus:border-indigo-400"
+                  placeholder="student@pharma.edu"
+                  id="loginEmail"
+                />
+              </div>
+
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Password</label>
+                <input
+                  type="password"
+                  class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm focus:outline-none focus:border-indigo-400"
+                  placeholder="********"
+                />
+              </div>
+
+              <div class="flex items-center justify-between text-xs text-slate-400">
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="remember" class="rounded border-slate-700 bg-slate-900" />
+                  <label for="remember">Remember me</label>
+                </div>
+                <button type="button" class="hover:text-slate-200">Forgot password?</button>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full mt-2 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium"
+              >
+                Continue
+              </button>
+            </form>
+
+            <!-- Demo Hint -->
+            <div class="mt-4 text-[11px] text-slate-400 border border-slate-800 rounded-2xl p-3">
+              <div class="font-semibold text-slate-200 mb-1">Demo note:</div>
+              <ul class="space-y-1 list-disc list-inside">
+                <li>Student & College logins are UI-only in this demo.</li>
+                <li>Admin login navigates to the full dashboard preview.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why VR / Features Section -->
+      <section id="features" class="max-w-6xl mx-auto px-4 pb-12">
+        <h2 class="text-xl font-semibold mb-4">Why VR for Pharma Training?</h2>
+        <div class="grid md:grid-cols-3 gap-4 text-sm">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="font-semibold mb-1">Safe, repeatable practice</div>
+            <p class="text-slate-400">
+              Let students make mistakes in a <strong>virtual cleanroom</strong> instead of your real lab. 
+              Reset, replay, and refine technique as many times as needed.
+            </p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="font-semibold mb-1">Standardised assessments</div>
+            <p class="text-slate-400">
+              Every student faces the <strong>same validated scenario</strong>, removing subjectivity and
+              capturing objective performance data.
+            </p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="font-semibold mb-1">Faster certification</div>
+            <p class="text-slate-400">
+              College faculty track completion, request certificates, and let AScienti Sols
+              generate <strong>digital credentials</strong> instantly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section id="how-it-works" class="max-w-6xl mx-auto px-4 pb-16">
+        <h2 class="text-xl font-semibold mb-4">How AScienti Sols Works</h2>
+        <div class="grid md:grid-cols-4 gap-4 text-xs md:text-sm">
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="text-slate-400 mb-1">Step 1</div>
+            <div class="font-semibold mb-1">Institution Onboarding</div>
+            <p class="text-slate-400">
+              Pharmacy colleges partner with AScienti Sols and select VR modules 
+              (e.g., aseptic processing, dispensing, clinical scenarios).
+            </p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="text-slate-400 mb-1">Step 2</div>
+            <div class="font-semibold mb-1">Student Access</div>
+            <p class="text-slate-400">
+              Students receive login credentials after fee payment and college approval.
+              They use VR headsets / compatible devices to attempt scenarios.
+            </p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="text-slate-400 mb-1">Step 3</div>
+            <div class="font-semibold mb-1">Performance Tracking</div>
+            <p class="text-slate-400">
+              Completion, adherence to SOPs, and mistakes are recorded and visible to 
+              faculty on the web dashboard.
+            </p>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <div class="text-slate-400 mb-1">Step 4</div>
+            <div class="font-semibold mb-1">Certification</div>
+            <p class="text-slate-400">
+              Once criteria are met, admins trigger certificate generation and students 
+              download their verified pharma training certificates.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Join Modal (for Colleges / Institutions) -->
+    <div
+      id="joinModal"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition"
+    >
+      <div class="bg-slate-950 border border-slate-800 rounded-3xl w-full max-w-md p-6 relative">
+        <button
+          onclick="closeJoinModal()"
+          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none"
+        >
+          ×
+        </button>
+        <h2 class="text-lg font-semibold mb-1">Partner with AScienti Sols</h2>
+        <p class="text-xs text-slate-400 mb-4">
+          Fill in your institution details. In the live system, this flows through 
+          onboarding, agreements, and payment setup.
+        </p>
+        <form class="space-y-3 text-sm" onsubmit="handleJoin(event)" id="joinForm">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Institution / College Name</label>
+            <input
+              type="text"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
+              placeholder="e.g., XYZ College of Pharmacy"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Contact Person</label>
+            <input
+              type="text"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
+              placeholder="Name of faculty / coordinator"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Official Email</label>
+            <input
+              type="email"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
+              placeholder="contact@college.edu"
+              required
+            />
+          </div>-
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Interest Area</label>
+            <select
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
+              required
+            >
+              <option value="">-- Select VR Program --</option>
+              <option>Aseptic Processing & Cleanroom</option>
+              <option>Hospital & Clinical Pharmacy Scenarios</option>
+              <option>Community Pharmacy & Dispensing</option>
+              <option>Regulatory & GMP Compliance</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium"
+          >
+            Submit Interest (Demo)
+          </button>
+        </form>
+        <div id="joinMessage" class="mt-3 text-xs text-emerald-400 hidden">
+          ✔ Demo: Your interest has been recorded. In production, our team would contact you shortly.
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Registration Modal -->
+    <div
+      id="studentRegisterModal"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition"
+    >
+      <div class="bg-slate-950 border border-slate-800 rounded-3xl w-full max-w-md p-6 relative">
+        <button
+          onclick="closeStudentRegisterModal()"
+          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none"
+        >
+          ×
+        </button>
+        <h2 class="text-lg font-semibold mb-1">Student Registration</h2>
+        <p class="text-xs text-slate-400 mb-4">
+          Register to access VR pharma training scenarios.
+        </p>
+        <form class="space-y-3 text-sm" onsubmit="handleStudentRegister(event)" id="studentRegisterForm">
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Full Name</label>
+            <input
+              type="text"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="e.g., Jane Doe"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Email Address</label>
+            <input
+              type="email"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="jane.doe@student.edu"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Password</label>
+            <input
+              type="password"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="********"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Confirm Password</label>
+            <input
+              type="password"
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              placeholder="********"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-xs text-slate-400 mb-1">Select Your College</label>
+            <select
+              class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
+              required
+            >
+              <option value="">-- Select College --</option>
+              <option>ABC Engineering College</option>
+              <option>XYZ Institute of Technology</option>
+              <option>City Professional College</option>
+              <option>Global Pharma University</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 font-medium"
+          >
+            Register (Demo)
+          </button>
+        </form>
+        <div id="studentRegisterMessage" class="mt-3 text-xs text-emerald-400 hidden">
+          ✔ Demo: Registration successful! You can now log in.
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-8">
+      <div class="max-w-6xl mx-auto px-4 py-4 text-[11px] text-slate-500 flex flex-col md:flex-row md:justify-between gap-1">
+        <span>© <span id="yearSpan"></span> AScienti Sols · VR Pharma Training & Certification</span>
+        <span>Demo UI · Backend planned with Django, VR app, and secure APIs</span>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Scroll to login card
+    function scrollToLogin() {
+      document.getElementById("login").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Role tab switching
+    const roleTabs = document.querySelectorAll(".role-tab");
+    const selectedRoleInput = document.getElementById("selectedRole");
+    const loginEmail = document.getElementById("loginEmail");
+
+    const demoEmails = {
+      student: "student@pharma.edu",
+      college: "faculty@institution.edu",
+      admin: "admin@ascientisols.com",
+    };
+
+    roleTabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        roleTabs.forEach((b) => {
+          b.classList.remove("bg-slate-800", "text-slate-100", "border-slate-700");
+          b.classList.add("bg-slate-900", "text-slate-300", "border-slate-800");
+        });
+        btn.classList.add("bg-slate-800", "text-slate-100", "border-slate-700");
+        selectedRoleInput.value = btn.dataset.role;
+        loginEmail.value = demoEmails[btn.dataset.role];
+      });
+    });
+
+    // Fake login handler
+    function handleLogin(e) {
+      e.preventDefault();
+      const role = selectedRoleInput.value;
+      if (role === "admin") {
+        // For demo, just open admin dashboard
+        window.location.href = "/admin-demo/";
+      } else {
+        alert(
+          "This is a UI-only demo.\n\nStudent and College dashboards will be wired to VR assessment data in the full product."
+        );
+      }
+    }
+
+    // Join modal controls
+    const joinModal = document.getElementById("joinModal");
+    const joinMessage = document.getElementById("joinMessage");
+    const joinForm = document.getElementById("joinForm");
+
+    function openJoinModal() {
+      joinModal.classList.remove("opacity-0", "pointer-events-none");
+    }
+    function closeJoinModal() {
+      joinModal.classList.add("opacity-0", "pointer-events-none");
+      joinMessage.classList.add("hidden");
+      if (joinForm) joinForm.reset();
+    }
+    function handleJoin(e) {
+      e.preventDefault();
+      joinMessage.classList.remove("hidden");
+    }
+
+    // Student Registration modal controls
+    const studentRegisterModal = document.getElementById("studentRegisterModal");
+    const studentRegisterMessage = document.getElementById("studentRegisterMessage");
+    const studentRegisterForm = document.getElementById("studentRegisterForm");
+
+    function openStudentRegisterModal() {
+      studentRegisterModal.classList.remove("opacity-0", "pointer-events-none");
+    }
+    function closeStudentRegisterModal() {
+      studentRegisterModal.classList.add("opacity-0", "pointer-events-none");
+      studentRegisterMessage.classList.add("hidden");
+      if (studentRegisterForm) studentRegisterForm.reset();
+    }
+    function handleStudentRegister(e) {
+      e.preventDefault();
+      studentRegisterMessage.classList.remove("hidden");
+    }
+
+    // Footer year
+    document.getElementById("yearSpan").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

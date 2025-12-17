@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard · AScienti Sols VR Pharma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="w-64 bg-slate-950 border-r border-slate-800 fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 z-40 md:relative md:translate-x-0 md:flex flex-col">
+      <div class="px-4 py-4 border-b border-slate-800 flex items-center gap-2">
+        <div class="h-8 w-8 rounded-xl bg-indigo-500 flex items-center justify-center text-xs font-bold">
+          VT
+        </div>
+        <div>
+          <div class="text-sm font-semibold">Admin Panel</div>
+          <div class="text-[10px] text-slate-400">AScienti Sols · VR Pharma Training</div>
+        </div>
+      </div>
+      <nav class="flex-1 px-3 py-4 text-sm space-y-1">
+        <button class="w-full text-left px-3 py-2 rounded-xl bg-slate-900" data-view="colleges">
+          Colleges & Students
+        </button>
+        <button class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300" data-view="certificates">
+          Certificates
+        </button>
+        <button class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-900 text-slate-300" data-view="announcements">
+          Posts / Announcements
+        </button>
+      </nav>
+      <div class="px-3 py-4 border-t border-slate-800 text-xs text-slate-400">
+        Logged in as <span class="text-slate-200">admin@vtc.com</span>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+      <!-- Top Bar -->
+      <header class="h-14 border-b border-slate-800 flex items-center justify-between px-4 bg-slate-950/80 backdrop-blur">
+        <button id="sidebarToggle" class="inline-flex md:hidden items-center justify-center h-8 w-8 rounded-lg border border-slate-700 bg-slate-900 text-slate-200">
+          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <div>
+          <div class="text-sm font-medium">Colleges & Students Overview</div>
+          <div class="text-[11px] text-slate-400">
+            Deadlines are set by partner institutions. Access to VR scenarios depends on these dates.
+          </div>
+        </div>
+        <div class="flex items-center gap-3 text-xs">
+          <span class="hidden md:inline text-slate-400">Admin</span>
+          <div class="h-8 w-8 rounded-full bg-slate-800 flex items-center justify-center text-[11px]">
+            AD
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <main class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 max-w-6xl mx-auto">
+        <section id="view-colleges" class="space-y-4">
+          <!-- Summary Cards -->
+          <section class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Partner Institutions</div>
+              <div class="text-lg font-semibold" id="totalColleges">3</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Active Students</div>
+              <div class="text-lg font-semibold" id="totalStudents">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">VR Certificates Issued</div>
+              <div class="text-lg font-semibold" id="totalCertificates">0</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Locked VR Batches</div>
+              <div class="text-lg font-semibold" id="totalLocked">0</div>
+            </div>
+          </section>
+
+          <section class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Overall Completion Rate</div>
+              <div class="text-lg font-semibold" id="overallCompletionRate">0%</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Percentage of students with completed programs.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">In-progress Students</div>
+              <div class="text-lg font-semibold" id="inProgressCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students still attempting VR scenarios.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Locked Students</div>
+              <div class="text-lg font-semibold" id="lockedStudentsCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students whose access has been locked / reset.
+              </div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3">
+              <div class="text-slate-400 mb-1">Certificates Pending</div>
+              <div class="text-lg font-semibold" id="pendingCertificatesCount">0</div>
+              <div class="text-[11px] text-slate-500 mt-1">
+                Students who completed but do not yet have a certificate.
+              </div>
+            </div>
+          </section>
+
+          <!-- Colleges Table -->
+          <section class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-5 text-xs md:text-sm">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-baseline gap-2">
+                <h2 class="text-sm font-semibold">Institutions & VR Program Deadlines</h2>
+                <div class="text-[11px] text-slate-400">
+                  Click an institution to see its students, VR scenarios, and activity.
+                </div>
+              </div>
+              <button
+                id="createCollegeBtn"
+                class="px-3 py-1.5 rounded-xl bg-indigo-600 text-white text-xs font-medium hover:bg-indigo-700 transition"
+              >
+                Create College
+              </button>
+            </div>
+            <div class="border border-slate-800 rounded-2xl overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full min-w-[640px] text-left border-collapse">
+                  <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
+                    <tr>
+                      <th class="py-2.5 px-3">College</th>
+                      <th class="py-2.5 px-3">Program</th>
+                      <th class="py-2.5 px-3">Deadline</th>
+                      <th class="py-2.5 px-3">Students</th>
+                      <th class="py-2.5 px-3">Status</th>
+                      <th class="py-2.5 px-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="collegeTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
+                    <!-- Filled by JS -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- Students & Activity -->
+          <section class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <!-- Students List -->
+            <div class="md:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-5 text-xs md:text-sm">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-semibold">
+                  Students in <span id="selectedCollegeName">Select a college</span>
+                </h2>
+                <span id="selectedCollegeDeadline" class="text-[11px] text-slate-400"></span>
+              </div>
+              <div id="selectedCollegeStats" class="mb-3 hidden">
+                <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+                  <span>College analytics (demo):</span>
+                  <span id="selectedCollegeCounts" class="text-slate-300"></span>
+                </div>
+                <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                  <div class="h-full flex" id="selectedCollegeStatsBar">
+                    <!-- JS will insert colored segments -->
+                  </div>
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                  <span id="selectedCollegeCompletedLabel">Completed: 0</span>
+                  <span id="selectedCollegeInProgressLabel">In Progress: 0</span>
+                  <span id="selectedCollegeLockedLabel">Locked: 0</span>
+                </div>
+              </div>
+              <div class="border border-slate-800 rounded-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                  <table class="w-full min-w-[640px] text-left border-collapse">
+                    <thead class="bg-slate-950/70 text-[11px] uppercase tracking-wide text-slate-400">
+                      <tr>
+                        <th class="py-2.5 px-3">Student</th>
+                        <th class="py-2.5 px-3">Access till</th>
+                        <th class="py-2.5 px-3">Activity</th>
+                        <th class="py-2.5 px-3">Certificate</th>
+                        <th class="py-2.5 px-3">Program</th>
+                        <th class="py-2.5 px-3">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="studentTableBody" class="text-[11px] md:text-xs bg-slate-950/30">
+                      <tr>
+                        <td colspan="6" class="py-6 px-3 text-center text-slate-500">
+                          Select a college in the table above to view students.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Activity Panel -->
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 md:p-5 text-xs md:text-sm">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="text-sm font-semibold">Recent VR Activity</h2>
+                <span class="text-[11px] text-slate-400">Demo data</span>
+              </div>
+              <div id="activityList" class="space-y-2 text-[11px] md:text-xs">
+                <!-- Filled by JS -->
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Dynamic View Container -->
+        <div id="dynamic-view-container" class="space-y-4">
+          <!-- Content will be loaded here by JS -->
+        </div>
+      </main>
+
+      <!-- Toast Notification -->
+    <div
+        id="toast"
+        class="fixed bottom-4 right-4 px-4 py-2 rounded-2xl bg-slate-900 border border-slate-700 text-xs text-slate-50 shadow-lg shadow-slate-900/60 opacity-0 pointer-events-none transition"
+      >
+        <span id="toastMessage">Action completed.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create College Modal -->
+  <div
+    id="createCollegeModal"
+    class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+  >
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl shadow-xl w-full max-w-md p-6 relative">
+      <button
+        class="absolute top-4 right-4 text-slate-400 hover:text-slate-200 text-xl"
+        onclick="closeCreateCollegeModal()"
+      >
+        &times;
+      </button>
+      <h3 class="text-lg font-semibold text-slate-100 mb-1">Create College Profile (Demo Only)</h3>
+      <p class="text-xs text-slate-400 mb-4">This is a demo form. Data is not actually saved.</p>
+
+      <form id="createCollegeForm" onsubmit="handleCreateCollegeDemoSubmit(event)" class="space-y-4">
+        <div>
+          <label for="collegeName" class="block text-slate-400 text-xs mb-1">College Name</label>
+          <input
+            type="text"
+            id="collegeName"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., Tech University"
+            required
+          />
+        </div>
+        <div>
+          <label for="programName" class="block text-slate-400 text-xs mb-1">Program Name</label>
+          <input
+            type="text"
+            id="programName"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., AI & Machine Learning"
+            required
+          />
+        </div>
+        <div>
+          <label for="deadline" class="block text-slate-400 text-xs mb-1">Deadline</label>
+          <input
+            type="date"
+            id="deadline"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            required
+          />
+        </div>
+        <div>
+          <label for="status" class="block text-slate-400 text-xs mb-1">Status</label>
+          <select
+            id="status"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            required
+          >
+            <option value="Active">Active</option>
+            <option value="Upcoming">Upcoming</option>
+            <option value="Expired">Expired</option>
+          </select>
+        </div>
+        <div>
+          <label for="estimatedStudents" class="block text-slate-400 text-xs mb-1">Estimated Students</label>
+          <input
+            type="number"
+            id="estimatedStudents"
+            class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:border-indigo-500 text-sm"
+            placeholder="e.g., 150"
+            min="0"
+            required
+          />
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+          <button
+            type="button"
+            class="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800 transition"
+            onclick="closeCreateCollegeModal()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 transition"
+          >
+            Save (Demo)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile sidebar -->
+  <div id="sidebarOverlay" class="fixed inset-0 bg-black/50 z-30 hidden md:hidden"></div>
+
+  <script>
+    console.log("Script started!");
+    // Demo data (fake "database")
+    const colleges = [
+      {
+        id: 1,
+        name: "ABC Engineering College",
+        program: "Aseptic Processing VR Lab",
+        deadline: "2025-12-31",
+        status: "Active",
+        locked: false,
+        students: [
+          {
+            id: 101,
+            name: "Rahul Sharma",
+            accessTill: "2025-12-31",
+            activity: "Completed 8/10 VR scenarios",
+            certificateIssued: true,
+            programStatus: "Completed",
+          },
+          {
+            id: 102,
+            name: "Ananya Verma",
+            accessTill: "2025-12-31",
+            activity: "Completed 5/10 VR scenarios",
+            certificateIssued: false,
+            programStatus: "In Progress",
+          },
+        ],
+      },
+      {
+        id: 2,
+        name: "XYZ Institute of Technology",
+        program: "Clinical Pharmacy VR Simulation",
+        deadline: "2025-11-30",
+        status: "Active",
+        locked: false,
+        students: [
+          {
+            id: 201,
+            name: "Arjun Mehta",
+            accessTill: "2025-11-30",
+            activity: "Completed 10/10 VR scenarios",
+            certificateIssued: true,
+            programStatus: "Completed",
+          },
+          {
+            id: 202,
+            name: "Sara Khan",
+            accessTill: "2025-11-30",
+            activity: "Completed 2/10 VR scenarios",
+            certificateIssued: false,
+            programStatus: "In Progress",
+          },
+        ],
+      },
+      {
+        id: 3,
+        name: "City Professional College",
+        program: "Community Pharmacy & Counseling VR",
+        deadline: "2025-10-15",
+        status: "Expired",
+        locked: true,
+        students: [
+          {
+            id: 301,
+            name: "Vikram Singh",
+            accessTill: "2025-10-15",
+            activity: "Completed 10/10 VR scenarios",
+            certificateIssued: true,
+            programStatus: "Locked",
+          },
+        ],
+      },
+    ];
+
+    // Elements
+    const collegeTableBody = document.getElementById("collegeTableBody");
+    const studentTableBody = document.getElementById("studentTableBody");
+    const selectedCollegeName = document.getElementById("selectedCollegeName");
+    const selectedCollegeDeadline = document.getElementById("selectedCollegeDeadline");
+    const activityList = document.getElementById("activityList");
+    const toast = document.getElementById("toast");
+    const toastMessage = document.getElementById("toastMessage");
+const totalCollegesEl = document.getElementById("totalColleges");
+const totalStudentsEl = document.getElementById("totalStudents");
+const totalCertificatesEl = document.getElementById("totalCertificates");
+const totalLockedEl = document.getElementById("totalLocked");
+
+const overallCompletionRateEl = document.getElementById("overallCompletionRate");
+const inProgressCountEl = document.getElementById("inProgressCount");
+const lockedStudentsCountEl = document.getElementById("lockedStudentsCount");
+const pendingCertificatesCountEl = document.getElementById("pendingCertificatesCount");
+
+const selectedCollegeStats = document.getElementById("selectedCollegeStats");
+const selectedCollegeStatsBar = document.getElementById("selectedCollegeStatsBar");
+const selectedCollegeCounts = document.getElementById("selectedCollegeCounts");
+const selectedCollegeCompletedLabel = document.getElementById("selectedCollegeCompletedLabel");
+const selectedCollegeInProgressLabel = document.getElementById("selectedCollegeInProgressLabel");
+const selectedCollegeLockedLabel = document.getElementById("selectedCollegeLockedLabel");
+
+    let selectedCollegeId = null;
+
+    // Render summary
+    function renderSummary() {
+      const totalColleges = colleges.length;
+      const totalStudents = colleges.reduce((sum, c) => sum + c.students.length, 0);
+      const totalCertificates = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.certificateIssued).length,
+        0
+      );
+      const totalLocked = colleges.filter((c) => c.locked).length;
+
+      totalCollegesEl.textContent = totalColleges;
+      totalStudentsEl.textContent = totalStudents;
+      totalCertificatesEl.textContent = totalCertificates;
+      totalLockedEl.textContent = totalLocked;
+
+      // New analytics calculations
+      const totalStudentsAll = colleges.reduce((sum, c) => sum + c.students.length, 0);
+      const completedCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "Completed").length,
+        0
+      );
+      const inProgressCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "In Progress").length,
+        0
+      );
+      const lockedCount = colleges.reduce(
+        (sum, c) => sum + c.students.filter((s) => s.programStatus === "Locked").length,
+        0
+      );
+      const pendingCertsCount = colleges.reduce(
+        (sum, c) =>
+          sum +
+          c.students.filter((s) => s.programStatus === "Completed" && s.certificateIssued === false)
+            .length,
+        0
+      );
+
+      const completionRate = totalStudentsAll === 0 ? 0 : Math.round((completedCount / totalStudentsAll) * 100);
+
+      if (overallCompletionRateEl) overallCompletionRateEl.textContent = `${completionRate}%`;
+      if (inProgressCountEl) inProgressCountEl.textContent = inProgressCount;
+      if (lockedStudentsCountEl) lockedStudentsCountEl.textContent = lockedCount;
+      if (pendingCertificatesCountEl) pendingCertificatesCountEl.textContent = pendingCertsCount;
+    }
+
+    // Render colleges table
+    function renderColleges() {
+      collegeTableBody.innerHTML = "";
+      colleges.forEach((college) => {
+        const row = document.createElement("tr");
+        row.className = "border-t border-slate-800/80 hover:bg-slate-900/50 cursor-pointer";
+
+        row.innerHTML = `
+          <td class="py-2.5 px-3 align-top">
+            <div class="font-medium text-[11px] md:text-xs">${college.name}</div>
+          </td>
+          <td class="py-2.5 px-3 align-top text-slate-300">
+            ${college.program}
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-[11px]">
+              ${college.deadline}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            ${college.students.length}
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] ${
+              college.status === "Active"
+                ? "bg-emerald-900/40 text-emerald-200 border border-emerald-700/60"
+                : "bg-slate-900 text-slate-300 border border-slate-700"
+            }">
+              ${college.locked ? "Locked" : college.status}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <div class="flex flex-wrap gap-1">
+              <button
+                class="px-2 py-1 rounded-full bg-slate-900 border border-slate-700 text-[11px] hover:border-slate-500"
+                data-view-college="${college.id}"
+              >
+                View students
+              </button>
+              <button
+                class="px-2 py-1 rounded-full bg-slate-900 border border-red-700 text-[11px] text-red-200 hover:bg-red-900/40"
+                data-reset-college="${college.id}"
+              >
+                Reset program
+              </button>
+            </div>
+          </td>
+        `;
+
+        collegeTableBody.appendChild(row);
+      });
+    }
+
+    // Render students table for selected college
+    function renderStudents(collegeId) {
+      const college = colleges.find((c) => c.id === collegeId);
+      if (!college) return;
+
+      selectedCollegeId = collegeId;
+      selectedCollegeName.textContent = college.name;
+      selectedCollegeDeadline.textContent = `College deadline: ${college.deadline}`;
+
+      // Per-college analytics
+      const total = college.students.length;
+      const completed = college.students.filter((s) => s.programStatus === "Completed").length;
+      const inProgress = college.students.filter((s) => s.programStatus === "In Progress").length;
+      const locked = college.students.filter((s) => s.programStatus === "Locked").length;
+
+      if (total === 0) {
+        if (selectedCollegeStats) selectedCollegeStats.classList.add("hidden");
+      } else {
+        if (selectedCollegeStats) selectedCollegeStats.classList.remove("hidden");
+      }
+
+      if (selectedCollegeCounts) {
+        selectedCollegeCounts.textContent = `Total: ${total} · Completed: ${completed} · In Progress: ${inProgress} · Locked: ${locked}`;
+      }
+
+      const completedPct = total > 0 ? (completed / total) * 100 : 0;
+      const inProgressPct = total > 0 ? (inProgress / total) * 100 : 0;
+      const lockedPct = total > 0 ? (locked / total) * 100 : 0;
+
+      if (selectedCollegeStatsBar) {
+        selectedCollegeStatsBar.innerHTML = "";
+        if (completedPct > 0) {
+          const completedSegment = document.createElement("div");
+          completedSegment.style.width = `${completedPct}%`;
+          completedSegment.className = "bg-emerald-500";
+          selectedCollegeStatsBar.appendChild(completedSegment);
+        }
+        if (inProgressPct > 0) {
+          const inProgressSegment = document.createElement("div");
+          inProgressSegment.style.width = `${inProgressPct}%`;
+          inProgressSegment.className = "bg-indigo-500";
+          selectedCollegeStatsBar.appendChild(inProgressSegment);
+        }
+        if (lockedPct > 0) {
+          const lockedSegment = document.createElement("div");
+          lockedSegment.style.width = `${lockedPct}%`;
+          lockedSegment.className = "bg-slate-600";
+          selectedCollegeStatsBar.appendChild(lockedSegment);
+        }
+      }
+
+      if (selectedCollegeCompletedLabel) selectedCollegeCompletedLabel.textContent = `Completed: ${completed}`;
+      if (selectedCollegeInProgressLabel) selectedCollegeInProgressLabel.textContent = `In Progress: ${inProgress}`;
+      if (selectedCollegeLockedLabel) selectedCollegeLockedLabel.textContent = `Locked: ${locked}`;
+
+      studentTableBody.innerHTML = "";
+      college.students.forEach((student) => {
+        const row = document.createElement("tr");
+        row.className = "border-t border-slate-800/80";
+
+        row.innerHTML = `
+          <td class="py-2.5 px-3 align-top">
+            <div class="font-medium text-[11px] md:text-xs">${student.name}</div>
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-slate-900 border border-slate-700 text-[11px]">
+              ${student.accessTill}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 align-top text-slate-300">
+            ${student.activity}
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] ${
+              student.certificateIssued
+                ? "bg-emerald-900/40 text-emerald-200 border border-emerald-700/60"
+                : "bg-slate-900 text-slate-300 border border-slate-700"
+            }">
+              ${student.certificateIssued ? "Issued" : "Not issued"}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] ${
+              student.programStatus === "Completed"
+                ? "bg-emerald-900/40 text-emerald-200 border border-emerald-700/60"
+                : student.programStatus === "Locked"
+                ? "bg-slate-900 text-slate-300 border border-slate-700"
+                : "bg-indigo-900/40 text-indigo-200 border border-indigo-700/60"
+            }">
+              ${student.programStatus}
+            </span>
+          </td>
+          <td class="py-2.5 px-3 align-top">
+            <div class="flex flex-wrap gap-1">
+              <button
+                class="px-2 py-1 rounded-full bg-slate-900 border border-indigo-700 text-[11px] text-indigo-200 hover:bg-indigo-900/40"
+                data-generate-cert="${student.id}"
+              >
+                Generate cert
+              </button>
+              <button
+                class="px-2 py-1 rounded-full bg-slate-900 border border-red-700 text-[11px] text-red-200 hover:bg-red-900/40"
+                data-reset-student="${student.id}"
+              >
+                Reset program
+              </button>
+            </div>
+          </td>
+        `;
+
+        studentTableBody.appendChild(row);
+      });
+
+      renderActivity(college);
+    }
+
+    // Render activity panel
+    function renderActivity(college) {
+      activityList.innerHTML = "";
+      const entries = [];
+
+      college.students.forEach((s) => {
+        entries.push({
+          text: `${s.name} (${college.name}) - ${s.activity}`,
+          type: s.certificateIssued ? "success" : "info",
+        });
+      });
+
+      entries.forEach((entry) => {
+        const div = document.createElement("div");
+        div.className = "flex gap-2";
+        div.innerHTML = `
+          <div class="mt-[3px] h-1.5 w-1.5 rounded-full ${
+            entry.type === "success" ? "bg-emerald-400" : "bg-indigo-400"
+          }"></div>
+          <div class="text-slate-200">${entry.text}</div>
+        `;
+        activityList.appendChild(div);
+      });
+    }
+
+    // Toast
+    function showToast(message) {
+      toastMessage.textContent = message;
+      toast.classList.remove("opacity-0", "pointer-events-none");
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "pointer-events-none");
+      }, 2000);
+    }
+
+    // Modal functions
+    let createCollegeModal;
+    let createCollegeForm;
+
+    function openCreateCollegeModal() {
+      console.log("openCreateCollegeModal called");
+      if (createCollegeModal) {
+        console.log("createCollegeModal element found.");
+        createCollegeModal.classList.remove("opacity-0", "pointer-events-none");
+        createCollegeModal.classList.add("opacity-100");
+      } else {
+        console.error("createCollegeModal element not found in openCreateCollegeModal!");
+      }
+    }
+
+    function closeCreateCollegeModal() {
+      console.log("closeCreateCollegeModal called");
+      if (createCollegeModal) {
+        createCollegeModal.classList.remove("opacity-100");
+        createCollegeModal.classList.add("opacity-0", "pointer-events-none");
+        createCollegeForm.reset(); // Reset form fields on close
+      }
+    }
+
+    function handleCreateCollegeDemoSubmit(event) {
+      event.preventDefault(); // Prevent actual form submission
+      console.log("handleCreateCollegeDemoSubmit called");
+      showToast("Demo only: College profile UI captured but not saved.");
+      setTimeout(() => {
+        closeCreateCollegeModal();
+      }, 1500); // Close modal after a short delay to show toast
+    }
+
+    // Event delegation for colleges table
+    collegeTableBody.addEventListener("click", (e) => {
+      const viewBtn = e.target.closest("[data-view-college]");
+      const resetBtn = e.target.closest("[data-reset-college]");
+
+      if (viewBtn) {
+        const collegeId = parseInt(viewBtn.dataset.viewCollege, 10);
+        renderStudents(collegeId);
+      }
+
+      if (resetBtn) {
+        const collegeId = parseInt(resetBtn.dataset.resetCollege, 10);
+        const college = colleges.find((c) => c.id === collegeId);
+        if (college) {
+          college.locked = true;
+          college.status = "Expired";
+          college.students.forEach((s) => {
+            s.programStatus = "Locked";
+          });
+          renderColleges();
+          if (collegeId === selectedCollegeId) renderStudents(collegeId);
+          renderSummary();
+          showToast(`Program reset and locked for ${college.name}. Answers hidden; marks retained.`);
+        }
+      }
+    });
+
+    // Event delegation for students table
+    studentTableBody.addEventListener("click", (e) => {
+      const resetBtn = e.target.closest("[data-reset-student]");
+      const certBtn = e.target.closest("[data-generate-cert]");
+
+      if (!selectedCollegeId) return;
+
+      const college = colleges.find((c) => c.id === selectedCollegeId);
+      if (!college) return;
+
+      if (resetBtn) {
+        const studentId = parseInt(resetBtn.dataset.resetStudent, 10);
+        const student = college.students.find((s) => s.id === studentId);
+        if (student) {
+          student.programStatus = "Locked";
+          student.activity = "Program completed and reset. Must re-purchase for new access.";
+          renderStudents(selectedCollegeId);
+          showToast(`Program reset for ${student.name}.`);
+        }
+      }
+
+      if (certBtn) {
+        const studentId = parseInt(certBtn.dataset.generateCert, 10);
+        const student = college.students.find((s) => s.id === studentId);
+        if (student) {
+          student.certificateIssued = true;
+          student.programStatus = "Completed";
+          renderStudents(selectedCollegeId);
+          renderSummary();
+          showToast(`Certificate generated for ${student.name}.`);
+        }
+      }
+    });
+
+    // Elements for view switching
+    const viewColleges = document.getElementById("view-colleges");
+    const dynamicViewContainer = document.getElementById("dynamic-view-container");
+    const sidebarButtons = document.querySelectorAll("#sidebar nav button[data-view]");
+
+    // Function to show a specific view
+    async function showView(viewId) {
+      // Hide all views and clear dynamic container
+      viewColleges.classList.add("hidden");
+      dynamicViewContainer.innerHTML = "";
+
+      if (viewId === "colleges") {
+        viewColleges.classList.remove("hidden");
+      } else if (viewId === "certificates") {
+        window.location.href = "/certificates/";
+        return;
+      } else if (viewId === "announcements") {
+        window.location.href = "/announcements/";
+        return;
+      } else {
+        // Fallback for other views if any, though not strictly needed for this task
+        try {
+          const response = await fetch(`${viewId}.html`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const content = await response.text();
+          dynamicViewContainer.innerHTML = content;
+        } catch (error) {
+          console.error(`Failed to load ${viewId}.html:`, error);
+          dynamicViewContainer.innerHTML = `<p class="text-red-400">Error loading content for ${viewId}.</p>`;
+        }
+      }
+
+      // Update active state of sidebar buttons
+      sidebarButtons.forEach(button => {
+        if (button.dataset.view === viewId) {
+          button.classList.add("bg-slate-900");
+          button.classList.remove("hover:bg-slate-900", "text-slate-300");
+        } else {
+          button.classList.remove("bg-slate-900");
+          button.classList.add("hover:bg-slate-900", "text-slate-300");
+        }
+      });
+    }
+
+    // Initial render
+    renderSummary();
+    renderColleges();
+    showView("colleges"); // Show colleges view by default
+
+    // Ensure DOM is fully loaded before attaching event listeners
+    document.addEventListener("DOMContentLoaded", () => {
+      createCollegeModal = document.getElementById("createCollegeModal");
+      createCollegeForm = document.getElementById("createCollegeForm");
+
+      const createCollegeBtn = document.getElementById("createCollegeBtn");
+      if (createCollegeBtn) {
+        createCollegeBtn.addEventListener("click", openCreateCollegeModal);
+      } else {
+        console.error("Create College button not found!");
+      }
+
+      if (!createCollegeModal) {
+        console.error("createCollegeModal element not found on DOMContentLoaded!");
+      }
+      if (!createCollegeForm) {
+        console.error("createCollegeForm element not found on DOMContentLoaded!");
+      }
+
+      // Sidebar toggle logic
+      const sidebar = document.getElementById("sidebar");
+      const sidebarToggle = document.getElementById("sidebarToggle");
+      const sidebarOverlay = document.getElementById("sidebarOverlay");
+
+      if (sidebar && sidebarToggle && sidebarOverlay) {
+        const toggleSidebar = () => {
+          sidebar.classList.toggle("-translate-x-full");
+          sidebarOverlay.classList.toggle("hidden");
+        };
+
+        sidebarToggle.addEventListener("click", toggleSidebar);
+        sidebarOverlay.addEventListener("click", toggleSidebar);
+      } else {
+        console.error("Sidebar, toggle button, or overlay element not found!");
+      }
+
+      // Add event listeners for sidebar view buttons
+      sidebarButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          showView(button.dataset.view);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
