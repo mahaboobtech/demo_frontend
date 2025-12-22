@@ -1,0 +1,49 @@
+{% extends 'core/theme3/base.html' %}
+{% block title %}News & Updates | AScienti Theme 3{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row text-center mb-5">
+        <div class="col-lg-6 mx-auto">
+            <h6 class="text-primary fw-bold text-uppercase">Announcements</h6>
+            <h2 class="fw-bold">Stay Updated with AScienti</h2>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card h-100 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-4 bg-light d-flex align-items-center justify-content-center">
+                        <img src="/static/image.png" style="width: 50px; opacity: 0.3;" alt="News">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Multiplayer VR Labs Coming Soon</h5>
+                            <p class="card-text text-muted small">Collaborative pharma training simulations will be
+                                available next quarter. Teamwork in the cleanroom is now virtual.</p>
+                            <p class="card-text"><small class="text-muted">Dec 18, 2025</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100 overflow-hidden">
+                <div class="row g-0">
+                    <div class="col-4 bg-light d-flex align-items-center justify-content-center">
+                        <img src="/static/image.png" style="width: 50px; opacity: 0.3;" alt="News">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Global Pharma University Certification</h5>
+                            <p class="card-text text-muted small">We are proud to partner with GPU to offer executive
+                                certifications in pharmaceutical management via VR.</p>
+                            <p class="card-text"><small class="text-muted">Dec 10, 2025</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

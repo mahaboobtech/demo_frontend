@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>AScienti Sols · VR Pharma Training & Certification</title>
@@ -7,9 +8,28 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-slate-950 text-slate-100">
   <!-- Page Wrapper -->
   <div class="min-h-screen flex flex-col">
+    <!-- Theme Switcher -->
+    <div class="bg-indigo-900 text-white text-[10px] py-1 px-4 flex justify-between items-center relative z-50">
+      <span>Preview Themes:</span>
+      <div class="flex gap-3">
+        <a href="/?theme=default"
+          class="hover:underline {% if not request.COOKIES.theme or request.COOKIES.theme == 'default' %}font-bold underline text-indigo-200{% endif %}">Default</a>
+        <a href="/?theme=theme2"
+          class="hover:underline {% if request.COOKIES.theme == 'theme2' %}font-bold underline text-indigo-200{% endif %}">Theme
+          2 (Edu Center)</a>
+        <a href="/?theme=theme3"
+          class="hover:underline {% if request.COOKIES.theme == 'theme3' %}font-bold underline text-indigo-200{% endif %}">Theme
+          3 (Seoly)</a>
+        <a href="/?theme=theme4"
+          class="hover:underline {% if request.COOKIES.theme == 'theme4' %}font-bold underline text-indigo-200{% endif %}">Theme
+          4 (Ebo)</a>
+      </div>
+    </div>
+
     <!-- Navbar -->
     <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-20">
       <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -27,10 +47,8 @@
           <a href="#how-it-works" class="hover:text-white">How It Works</a>
           <a href="#join" class="hover:text-white">For Colleges</a>
         </nav>
-        <button
-          onclick="scrollToLogin()"
-          class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-500 hover:bg-indigo-400 transition"
-        >
+        <button onclick="scrollToLogin()"
+          class="px-4 py-2 rounded-xl text-sm font-medium bg-indigo-500 hover:bg-indigo-400 transition">
           Login
         </button>
       </div>
@@ -41,36 +59,31 @@
       <section class="max-w-6xl mx-auto px-4 py-12 md:py-16 grid md:grid-cols-2 gap-10 items-center">
         <!-- Left: Copy -->
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs mb-4">
+          <div
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs mb-4">
             <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
             Pharma · VR Lab Simulations · Skill Validation
           </div>
           <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-4">
-            VR-powered <span class="text-indigo-400">pharma training</span>  
+            VR-powered <span class="text-indigo-400">pharma training</span>
             and certification for students & institutions.
           </h1>
           <p class="text-slate-300 text-sm md:text-base mb-6">
-            AScienti Sols helps pharmacy colleges and training centers run 
-            <strong>virtual reality lab simulations</strong>, assess students on <strong>real-world scenarios</strong>, 
+            AScienti Sols helps pharmacy colleges and training centers run
+            <strong>virtual reality lab simulations</strong>, assess students on <strong>real-world scenarios</strong>,
             and issue <strong>industry-ready certificates</strong> — all on a single platform.
           </p>
           <div class="flex flex-wrap gap-3 mb-8">
-            <button
-              onclick="openJoinModal()"
-              class="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-sm font-medium"
-            >
+            <button onclick="openJoinModal()"
+              class="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 text-sm font-medium">
               Partner with Us (College)
             </button>
-            <button
-              onclick="scrollToLogin()"
-              class="px-5 py-2.5 rounded-xl border border-slate-700 hover:border-slate-500 text-sm font-medium"
-            >
+            <button onclick="scrollToLogin()"
+              class="px-5 py-2.5 rounded-xl border border-slate-700 hover:border-slate-500 text-sm font-medium">
               Existing User Login
             </button>
-            <button
-              onclick="openStudentRegisterModal()"
-              class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-sm font-medium"
-            >
+            <button onclick="openStudentRegisterModal()"
+              class="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-sm font-medium">
               Student Registration
             </button>
           </div>
@@ -107,22 +120,16 @@
 
             <!-- Role Tabs -->
             <div class="flex gap-2 mb-4 text-xs">
-              <button
-                class="role-tab px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800 text-slate-100"
-                data-role="student"
-              >
+              <button class="role-tab px-3 py-1.5 rounded-full border border-slate-700 bg-slate-800 text-slate-100"
+                data-role="student">
                 Student
               </button>
-              <button
-                class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
-                data-role="college"
-              >
+              <button class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
+                data-role="college">
                 College / Faculty
               </button>
-              <button
-                class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
-                data-role="admin"
-              >
+              <button class="role-tab px-3 py-1.5 rounded-full border border-slate-800 bg-slate-900 text-slate-300"
+                data-role="admin">
                 Admin
               </button>
             </div>
@@ -133,21 +140,16 @@
 
               <div>
                 <label class="block text-xs text-slate-400 mb-1">Email / Username</label>
-                <input
-                  type="text"
+                <input type="text"
                   class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm focus:outline-none focus:border-indigo-400"
-                  placeholder="student@pharma.edu"
-                  id="loginEmail"
-                />
+                  placeholder="student@pharma.edu" id="loginEmail" />
               </div>
 
               <div>
                 <label class="block text-xs text-slate-400 mb-1">Password</label>
-                <input
-                  type="password"
+                <input type="password"
                   class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-sm focus:outline-none focus:border-indigo-400"
-                  placeholder="********"
-                />
+                  placeholder="********" />
               </div>
 
               <div class="flex items-center justify-between text-xs text-slate-400">
@@ -158,10 +160,7 @@
                 <button type="button" class="hover:text-slate-200">Forgot password?</button>
               </div>
 
-              <button
-                type="submit"
-                class="w-full mt-2 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium"
-              >
+              <button type="submit" class="w-full mt-2 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium">
                 Continue
               </button>
             </form>
@@ -185,7 +184,7 @@
           <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4">
             <div class="font-semibold mb-1">Safe, repeatable practice</div>
             <p class="text-slate-400">
-              Let students make mistakes in a <strong>virtual cleanroom</strong> instead of your real lab. 
+              Let students make mistakes in a <strong>virtual cleanroom</strong> instead of your real lab.
               Reset, replay, and refine technique as many times as needed.
             </p>
           </div>
@@ -214,7 +213,7 @@
             <div class="text-slate-400 mb-1">Step 1</div>
             <div class="font-semibold mb-1">Institution Onboarding</div>
             <p class="text-slate-400">
-              Pharmacy colleges partner with AScienti Sols and select VR modules 
+              Pharmacy colleges partner with AScienti Sols and select VR modules
               (e.g., aseptic processing, dispensing, clinical scenarios).
             </p>
           </div>
@@ -230,7 +229,7 @@
             <div class="text-slate-400 mb-1">Step 3</div>
             <div class="font-semibold mb-1">Performance Tracking</div>
             <p class="text-slate-400">
-              Completion, adherence to SOPs, and mistakes are recorded and visible to 
+              Completion, adherence to SOPs, and mistakes are recorded and visible to
               faculty on the web dashboard.
             </p>
           </div>
@@ -238,7 +237,7 @@
             <div class="text-slate-400 mb-1">Step 4</div>
             <div class="font-semibold mb-1">Certification</div>
             <p class="text-slate-400">
-              Once criteria are met, admins trigger certificate generation and students 
+              Once criteria are met, admins trigger certificate generation and students
               download their verified pharma training certificates.
             </p>
           </div>
@@ -247,56 +246,42 @@
     </main>
 
     <!-- Join Modal (for Colleges / Institutions) -->
-    <div
-      id="joinModal"
-      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition"
-    >
+    <div id="joinModal"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition">
       <div class="bg-slate-950 border border-slate-800 rounded-3xl w-full max-w-md p-6 relative">
-        <button
-          onclick="closeJoinModal()"
-          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none"
-        >
+        <button onclick="closeJoinModal()"
+          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none">
           ×
         </button>
         <h2 class="text-lg font-semibold mb-1">Partner with AScienti Sols</h2>
         <p class="text-xs text-slate-400 mb-4">
-          Fill in your institution details. In the live system, this flows through 
+          Fill in your institution details. In the live system, this flows through
           onboarding, agreements, and payment setup.
         </p>
         <form class="space-y-3 text-sm" onsubmit="handleJoin(event)" id="joinForm">
           <div>
             <label class="block text-xs text-slate-400 mb-1">Institution / College Name</label>
-            <input
-              type="text"
+            <input type="text"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
-              placeholder="e.g., XYZ College of Pharmacy"
-              required
-            />
+              placeholder="e.g., XYZ College of Pharmacy" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Contact Person</label>
-            <input
-              type="text"
+            <input type="text"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
-              placeholder="Name of faculty / coordinator"
-              required
-            />
+              placeholder="Name of faculty / coordinator" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Official Email</label>
-            <input
-              type="email"
+            <input type="email"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
-              placeholder="contact@college.edu"
-              required
-            />
+              placeholder="contact@college.edu" required />
           </div>-
           <div>
             <label class="block text-xs text-slate-400 mb-1">Interest Area</label>
             <select
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-indigo-400"
-              required
-            >
+              required>
               <option value="">-- Select VR Program --</option>
               <option>Aseptic Processing & Cleanroom</option>
               <option>Hospital & Clinical Pharmacy Scenarios</option>
@@ -304,10 +289,7 @@
               <option>Regulatory & GMP Compliance</option>
             </select>
           </div>
-          <button
-            type="submit"
-            class="w-full py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium"
-          >
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 font-medium">
             Submit Interest (Demo)
           </button>
         </form>
@@ -318,15 +300,11 @@
     </div>
 
     <!-- Student Registration Modal -->
-    <div
-      id="studentRegisterModal"
-      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition"
-    >
+    <div id="studentRegisterModal"
+      class="fixed inset-0 bg-black/60 flex items-center justify-center z-30 opacity-0 pointer-events-none transition">
       <div class="bg-slate-950 border border-slate-800 rounded-3xl w-full max-w-md p-6 relative">
-        <button
-          onclick="closeStudentRegisterModal()"
-          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none"
-        >
+        <button onclick="closeStudentRegisterModal()"
+          class="absolute top-3 right-3 text-slate-500 hover:text-slate-200 text-xl leading-none">
           ×
         </button>
         <h2 class="text-lg font-semibold mb-1">Student Registration</h2>
@@ -336,46 +314,33 @@
         <form class="space-y-3 text-sm" onsubmit="handleStudentRegister(event)" id="studentRegisterForm">
           <div>
             <label class="block text-xs text-slate-400 mb-1">Full Name</label>
-            <input
-              type="text"
+            <input type="text"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
-              placeholder="e.g., Jane Doe"
-              required
-            />
+              placeholder="e.g., Jane Doe" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Email Address</label>
-            <input
-              type="email"
+            <input type="email"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
-              placeholder="jane.doe@student.edu"
-              required
-            />
+              placeholder="jane.doe@student.edu" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Password</label>
-            <input
-              type="password"
+            <input type="password"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
-              placeholder="********"
-              required
-            />
+              placeholder="********" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Confirm Password</label>
-            <input
-              type="password"
+            <input type="password"
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
-              placeholder="********"
-              required
-            />
+              placeholder="********" required />
           </div>
           <div>
             <label class="block text-xs text-slate-400 mb-1">Select Your College</label>
             <select
               class="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 focus:outline-none focus:border-emerald-400"
-              required
-            >
+              required>
               <option value="">-- Select College --</option>
               <option>ABC Engineering College</option>
               <option>XYZ Institute of Technology</option>
@@ -383,10 +348,7 @@
               <option>Global Pharma University</option>
             </select>
           </div>
-          <button
-            type="submit"
-            class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 font-medium"
-          >
+          <button type="submit" class="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 font-medium">
             Register (Demo)
           </button>
         </form>
@@ -398,7 +360,8 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-800 mt-8">
-      <div class="max-w-6xl mx-auto px-4 py-4 text-[11px] text-slate-500 flex flex-col md:flex-row md:justify-between gap-1">
+      <div
+        class="max-w-6xl mx-auto px-4 py-4 text-[11px] text-slate-500 flex flex-col md:flex-row md:justify-between gap-1">
         <span>© <span id="yearSpan"></span> AScienti Sols · VR Pharma Training & Certification</span>
         <span>Demo UI · Backend planned with Django, VR app, and secure APIs</span>
       </div>
@@ -488,4 +451,5 @@
     document.getElementById("yearSpan").textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>

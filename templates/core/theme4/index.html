@@ -1,0 +1,143 @@
+{% extends 'core/theme4/base.html' %}
+{% block title %}Landing | Theme 4{% endblock %}
+{% block theme_switcher %}
+<div class="theme-switcher-bar">
+    <span>Ebo Theme Variation - Dark UI</span>
+    <div>
+        <a href="/?theme=default">Default</a>
+        <a href="/?theme=theme2">Theme 2</a>
+        <a href="/?theme=theme3">Theme 3</a>
+        <a href="/?theme=theme4">Theme 4</a>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<section
+    class="min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 via-slate-900 to-black pb-32">
+    <div class="container mx-auto px-10 grid lg:grid-cols-2 gap-20 items-center">
+        <div class="space-y-8 animate-in fade-in slide-in-from-left duration-1000">
+            <h1 class="text-6xl md:text-8xl font-bold leading-none tracking-tight">Showcase your <span
+                    class="text-red-500 underline decoration-4 underline-offset-8">Pharma Skills</span> in VR.</h1>
+            <p class="text-xl text-slate-400 max-w-xl">This portal lets you tell your story and validates your
+                professional skills through high-end virtual simulations.</p>
+            <div class="pt-6">
+                <button onclick="document.getElementById('node-login').scrollIntoView({behavior: 'smooth'})"
+                    class="btn-ebo text-lg px-10 py-4 inline-block">Initialize Session</button>
+            </div>
+        </div>
+        <div class="relative animate-in zoom-in duration-1000">
+            <div class="absolute -inset-4 bg-red-500/20 blur-3xl rounded-full"></div>
+            <img src="/static/image.png"
+                class="relative z-10 w-full rounded-2xl border border-slate-800 shadow-2xl shadow-red-500/10"
+                alt="VR Image">
+        </div>
+    </div>
+</section>
+
+<section class="py-32 bg-slate-950 px-10">
+    <div class="text-center mb-20">
+        <h2 class="text-4xl font-bold mb-4">Core Capabilities</h2>
+        <div class="w-20 h-1 bg-red-500 mx-auto"></div>
+    </div>
+    <div class="grid md:grid-cols-3 gap-12">
+        <div
+            class="p-10 bg-slate-900 border border-slate-800 rounded-3xl hover:border-red-500/50 transition duration-500 group">
+            <div
+                class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Rapid Training</h3>
+            <p class="text-slate-400">Fast-track your learning curve with real-time feedback and modular sessions.</p>
+        </div>
+        <div
+            class="p-10 bg-slate-900 border border-slate-800 rounded-3xl hover:border-red-500/50 transition duration-500 group">
+            <div
+                class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Deep Compliance</h3>
+            <p class="text-slate-400">Fully aligned with GMP and global regulatory standards for pharma production.</p>
+        </div>
+        <div
+            class="p-10 bg-slate-900 border border-slate-800 rounded-3xl hover:border-red-500/50 transition duration-500 group">
+            <div
+                class="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition">
+                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Unlimited Practice</h3>
+            <p class="text-slate-400">Fail safely and repeat procedures until you reach mastery levels.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_content %}
+<section id="node-login" class="py-24 bg-black border-t border-slate-900 relative overflow-hidden">
+    <div class="absolute inset-0 bg-red-500/5 radial-gradient"></div>
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-md mx-auto bg-slate-900/80 backdrop-blur border border-slate-800 p-8 rounded-2xl shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="text-xs font-bold text-red-500 tracking-widest uppercase mb-2">Restricted Access</div>
+                <h2 class="text-2xl font-bold text-white">Node Authentication</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Operator
+                        ID</label>
+                    <input type="text" id="operator-id" value="ADMIN_NODE_01"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-slate-300 focus:border-red-500 focus:outline-none transition font-mono">
+                </div>
+                <div>
+                    <label class="block text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">Access
+                        Key</label>
+                    <input type="password" id="access-key" value="password123"
+                        class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-slate-300 focus:border-red-500 focus:outline-none transition font-mono">
+                </div>
+
+                <div class="pt-4">
+                    <button onclick="simulateLogin()" id="login-btn"
+                        class="block w-full bg-red-600 hover:bg-red-700 text-white font-bold text-center py-4 rounded-lg transition uppercase tracking-widest text-sm">
+                        Connect to Node
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <a href="{% url 'admin_demo' %}" class="text-xs text-slate-600 hover:text-red-500 transition"
+                        style="text-decoration: none;">Enter as Guest Observer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function simulateLogin() {
+        const btn = document.getElementById('login-btn');
+        const opId = document.getElementById('operator-id').value;
+        const accessKey = document.getElementById('access-key').value;
+
+        if (!opId || !accessKey) {
+            alert('Please enter Operator ID and Access Key');
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<span class="flex items-center justify-center gap-2"><svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Authenticating...</span>';
+
+        setTimeout(() => {
+            btn.innerHTML = 'Establishing Secure Link...';
+            setTimeout(() => {
+                window.location.href = "{% url 'admin_demo' %}";
+            }, 800);
+        }, 1200);
+    }
+</script>
+{% endblock %}

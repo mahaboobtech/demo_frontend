@@ -1,0 +1,40 @@
+{% extends 'core/theme4/base.html' %}
+{% block title %}Logs | Theme 4{% endblock %}
+{% block content %}
+<section class="py-20 px-10 min-h-screen">
+    <div class="container mx-auto max-w-4xl">
+        <h1 class="text-5xl font-bold mb-12">Communications Terminal</h1>
+
+        <div class="space-y-12">
+            <article class="group">
+                <div class="inline-block px-3 py-1 bg-red-500/10 text-red-500 text-xs font-bold rounded-full mb-4">
+                    Urgent</div>
+                <h2 class="text-3xl font-bold mb-4 group-hover:text-red-500 transition cursor-pointer">Security Patch:
+                    Node v2.4.1</h2>
+                <p class="text-slate-400 text-lg leading-relaxed">System-wide update scheduled for all VR nodes. Please
+                    ensure all active sessions are closed by midnight. This patch addresses stability in low-latency
+                    environments.</p>
+                <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
+                    <span>Dec 22, 2025</span>
+                    <span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+                    <span>Admin Team</span>
+                </div>
+            </article>
+
+            <article class="group">
+                <div class="inline-block px-3 py-1 bg-blue-500/10 text-blue-500 text-xs font-bold rounded-full mb-4">New
+                    Release</div>
+                <h2 class="text-3xl font-bold mb-4 group-hover:text-red-500 transition cursor-pointer">Module:
+                    Regulatory Compliance</h2>
+                <p class="text-slate-400 text-lg leading-relaxed">Download the latest module focusing on FDA 21 CFR Part
+                    11. Immersive scenarios now include electronic signature validation and audit trail maintenance.</p>
+                <div class="mt-6 flex items-center gap-4 text-sm text-slate-500">
+                    <span>Dec 15, 2025</span>
+                    <span class="w-1 h-1 bg-slate-700 rounded-full"></span>
+                    <span>Content Dept</span>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}

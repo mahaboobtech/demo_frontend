@@ -1,0 +1,71 @@
+{% extends 'core/theme4/base.html' %}
+{% block title %}Systems | Theme 4{% endblock %}
+{% block content %}
+<section class="py-20 px-10">
+    <div class="container mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+            <div>
+                <h1 class="text-4xl font-bold">Systems Health</h1>
+                <p class="text-slate-400">Status of institutional VR deployments.</p>
+            </div>
+            <div class="flex gap-4">
+                <div
+                    class="bg-emerald-500/10 text-emerald-500 px-4 py-2 rounded-full border border-emerald-500/20 text-sm font-bold flex items-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Systems Online
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div class="bg-slate-900/50 p-8 rounded-3xl border border-slate-800">
+                <div class="text-slate-500 text-sm mb-2 font-bold uppercase tracking-wider">Students</div>
+                <div class="text-3xl font-bold">841</div>
+            </div>
+            <div class="bg-slate-900/50 p-8 rounded-3xl border border-slate-800">
+                <div class="text-slate-500 text-sm mb-2 font-bold uppercase tracking-wider">Nodes</div>
+                <div class="text-3xl font-bold">842</div>
+            </div>
+            <div class="bg-slate-900/50 p-8 rounded-3xl border border-slate-800">
+                <div class="text-slate-500 text-sm mb-2 font-bold uppercase tracking-wider">Uptime</div>
+                <div class="text-3xl font-bold">99.9%</div>
+            </div>
+            <div class="bg-slate-900/50 p-8 rounded-3xl border border-slate-800">
+                <div class="text-slate-500 text-sm mb-2 font-bold uppercase tracking-wider">Certs</div>
+                <div class="text-3xl font-bold">843</div>
+            </div>
+        </div>
+
+        <div class="bg-black/40 rounded-3xl border border-slate-800 overflow-hidden">
+            <div class="p-8 border-b border-slate-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold">Recent Node Logs</h3>
+                <button class="text-red-500 text-sm font-bold hover:underline">View All Logs</button>
+            </div>
+            <div class="p-8 space-y-6">
+                <div class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center font-bold">01
+                        </div>
+                        <div>
+                            <div class="font-bold text-slate-200">Dispensing Simulation #42</div>
+                            <div class="text-slate-500">Student: Mark Zuckerberg (Demo)</div>
+                        </div>
+                    </div>
+                    <div class="text-slate-400">10:42 PM</div>
+                </div>
+                <div class="flex justify-between items-center text-sm border-b border-slate-800/50 pb-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center font-bold">02
+                        </div>
+                        <div>
+                            <div class="font-bold text-slate-200">Cleanroom SOP Audit</div>
+                            <div class="text-slate-500">Node: Central Lab A</div>
+                        </div>
+                    </div>
+                    <div class="text-slate-400">09:15 PM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

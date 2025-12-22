@@ -1,0 +1,65 @@
+{% extends 'core/theme3/base.html' %}
+{% block title %}Boost Visibility | AScienti Theme 3{% endblock %}
+{% block theme_switcher %}
+<div class="theme-switcher-bar">
+    <span>Theme 3 (Seoly Inspired) - AScienti Sols Portal</span>
+    <div>
+        <a href="/?theme=default">Default</a>
+        <a href="/?theme=theme2">Theme 2</a>
+        <a href="/?theme=theme3">Theme 3</a>
+        <a href="/?theme=theme4">Theme 4</a>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<section class="hero shadow-sm">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="badge bg-soft-primary text-primary mb-3">VR Pharma Training & Certification</div>
+                <h1>Enhance Skills, Validate Knowledge, Get Certified.</h1>
+                <p class="lead text-muted my-4">Unlock the power of immersive learning with our expert VR Pharma
+                    training solutions. Elevate your institution's training quality today.</p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="{% url 'admin_demo' %}" class="btn btn-main">Demo Login (Admin)</a>
+                    <a href="{% url 'admin_demo' %}" class="btn btn-outline-secondary py-2 px-4 rounded-3">Demo Login
+                        (Student)</a>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                <img src="/static/image.png" class="img-fluid rounded-4 shadow-lg" style="max-height: 400px;"
+                    alt="VR Hero">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div class="mb-4"><span class="badge bg-primary rounded-circle p-3">01</span></div>
+                    <h4>Immersive Lab</h4>
+                    <p class="text-muted">High-fidelity simulations for aseptic techniques and cleanroom protocols.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div class="mb-4"><span class="badge bg-primary rounded-circle p-3">02</span></div>
+                    <h4>Data-Driven</h4>
+                    <p class="text-muted">Capture every movement and decision to provide detailed performance metrics.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card p-4 h-100">
+                    <div class="mb-4"><span class="badge bg-primary rounded-circle p-3">03</span></div>
+                    <h4>Seamless Certs</h4>
+                    <p class="text-muted">Automatically generates verified certificates upon successful completion.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'core/theme3/base.html' %}
+{% block title %}Verify Credentials | AScienti Theme 3{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-lg-6">
+            <h2 class="fw-bold">My Verified Credentials</h2>
+            <p class="text-muted">Digital badges and certificates earned through VR lab simulations.</p>
+        </div>
+        <div class="col-lg-6 text-md-end">
+            <button class="btn btn-outline-primary shadow-sm rounded-pill">Share on LinkedIn</button>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card p-0 text-center">
+                <div class="bg-primary-subtle py-4">
+                    <img src="/static/image.png" style="width: 60px;" alt="Badge">
+                </div>
+                <div class="p-4">
+                    <h5 class="fw-bold">QC Specialist</h5>
+                    <p class="text-muted small">Quality Control & Validation</p>
+                    <hr>
+                    <a href="#" class="text-primary fw-bold text-decoration-none small">Download Certificate</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card p-0 text-center">
+                <div class="bg-success-subtle py-4">
+                    <img src="/static/image.png" style="width: 60px;" alt="Badge">
+                </div>
+                <div class="p-4">
+                    <h5 class="fw-bold">Bio-Safety L3</h5>
+                    <p class="text-muted small">Biorisk Management</p>
+                    <hr>
+                    <a href="#" class="text-primary fw-bold text-decoration-none small">Download Certificate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

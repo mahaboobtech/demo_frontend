@@ -1,0 +1,42 @@
+{% extends 'core/theme2/base.html' %}
+{% block title %}Home | Theme 2{% endblock %}
+{% block theme_switcher %}
+<div class="theme-switcher-bar">
+    <span>Theme 2 (Education Center) - Previewing AScienti Sols</span>
+    <div>
+        <a href="/?theme=default">Default</a>
+        <a href="/?theme=theme2">Theme 2</a>
+        <a href="/?theme=theme3">Theme 3</a>
+        <a href="/?theme=theme4">Theme 4</a>
+    </div>
+</div>
+{% endblock %}
+{% block content %}
+<div class="content_wrap">
+    <div style="text-align: center; padding: 60px 0;">
+        <h1 style="font-size: 3em; color: var(--main-color);">VR-powered pharma training</h1>
+        <p style="font-size: 1.2em; max-width: 800px; margin: 20px auto;">AScienti Sols helps pharmacy colleges and
+            training centers run virtual reality lab simulations and issue industry-ready certificates.</p>
+        <div style="margin-top: 30px;">
+            <a href="{% url 'admin_demo' %}" class="bt_button" style="background: var(--secondary-color);">Demo Login
+                (Admin)</a>
+            <a href="{% url 'admin_demo' %}" class="bt_button" style="margin-left: 10px;">Demo Login (Student)</a>
+        </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 50px;">
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+            <h3>Safe Simulations</h3>
+            <p>Practice in a virtual cleanroom without any risks.</p>
+        </div>
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+            <h3>Standardized Tests</h3>
+            <p>Objective scoring based on real-world scenarios.</p>
+        </div>
+        <div style="padding: 20px; border: 1px solid #eee; border-radius: 8px;">
+            <h3>Verified Certificates</h3>
+            <p>Instant digital credentials for successful students.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Ebo | AScienti Theme 4{% endblock %}</title>
+
+    <!-- Modern Dark Theme style -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Ubuntu', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        .theme-switcher-bar {
+            background: #000;
+            color: #666;
+            padding: 4px 20px;
+            font-size: 11px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .theme-switcher-bar a {
+            color: #888;
+            margin-left: 10px;
+        }
+
+        .theme-switcher-bar a:hover {
+            color: #fff;
+        }
+
+        .accent-border {
+            border-bottom: 2px solid #ef4444;
+        }
+
+        .btn-ebo {
+            background-color: #ef4444;
+            color: #fff;
+            border-radius: 9999px;
+            padding: 12px 32px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-ebo:hover {
+            background-color: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.4);
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #f1f5f9;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="antialiased">
+    {% block theme_switcher %}{% endblock %}
+
+    <header class="py-6 px-10 flex justify-between items-center bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+        <a href="{% url 'home' %}" class="flex items-center gap-3">
+            <img src="{% static 'image.png' %}" alt="Logo" class="w-10 h-10 rounded-lg">
+            <span class="text-2xl font-bold tracking-tighter">AScienti<span class="text-red-500">.</span></span>
+        </a>
+        <div class="flex items-center gap-6">
+            <span class="hidden md:inline text-slate-500 text-xs font-bold uppercase tracking-widest">Admin Node</span>
+            <a href="{% url 'home' %}"
+                class="text-xs font-bold text-red-500 hover:text-white transition uppercase tracking-widest">Disconnect</a>
+        </div>
+    </header>
+
+    <div class="flex {% if request.resolver_match.url_name == 'home' %}block{% endif %}">
+        {% if request.resolver_match.url_name != 'home' %}
+        <aside class="w-64 bg-black/20 border-r border-slate-800 min-h-screen pt-10 hidden md:block">
+            <nav class="px-6 space-y-6">
+                <div class="text-[10px] font-black text-slate-600 uppercase tracking-[0.2em]">Terminal Interface</div>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="{% url 'admin_demo' %}"
+                            class="block py-2 px-4 rounded-lg text-sm font-bold {% if request.resolver_match.url_name == 'admin_demo' %}bg-red-500/10 text-red-500 border border-red-500/20{% else %}text-slate-400 hover:text-white{% endif %}">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'announcements' %}"
+                            class="block py-2 px-4 rounded-lg text-sm font-bold {% if request.resolver_match.url_name == 'announcements' %}bg-red-500/10 text-red-500 border border-red-500/20{% else %}text-slate-400 hover:text-white{% endif %}">
+                            Communications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'certificates' %}"
+                            class="block py-2 px-4 rounded-lg text-sm font-bold {% if request.resolver_match.url_name == 'certificates' %}bg-red-500/10 text-red-500 border border-red-500/20{% else %}text-slate-400 hover:text-white{% endif %}">
+                            Validations
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        {% endif %}
+
+        <div class="flex-1">
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+    {% block extra_content %}{% endblock %}
+
+    <footer class="py-20 bg-black text-center text-slate-500">
+        <div class="container mx-auto">
+            <p class="mb-4">© 2025 AScienti Sols. Modern VR Labs.</p>
+            <div class="flex justify-center gap-6 text-sm">
+                <a href="#" class="hover:text-white">Privacy</a>
+                <a href="#" class="hover:text-white">Terms</a>
+                <a href="#" class="hover:text-white">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
