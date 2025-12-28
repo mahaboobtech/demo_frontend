@@ -14,7 +14,7 @@ def get_theme_template(request, page_name):
     
     filename = page_map.get(page_name, f"{page_name}.html")
     
-    if theme and theme != 'default' and theme in ['theme2', 'theme3', 'theme4']:
+    if theme and theme != 'default' and theme in ['theme2', 'theme3', 'theme4', 'theme5']:
         return f"core/{theme}/{page_name}.html"
     return f"core/{filename}"
 
